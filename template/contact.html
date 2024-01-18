@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block body %}
+  
+
+<div class=" d-flex align-items-center justify-content-center p-3 mt-4">
+  <img src="{% static 'img/contact_banner.png'%}" alt="" class="img-fluid">
+</div>
+<div class="jumbotron m-5">
+  <div class="container d-sm-none">
+      <h1 class="display-6">Contact the Grievance System</h1>
+      <hr>
+      <p class="text-justify  ">Feel free to send us a message using the form below. We'll get back to you as soon as possible.</p>
+  </div>
+  <div class="container d-none d-sm-block">
+      <h1 class="display-6">Contact the Grievance System</h1>
+      <hr>
+      <p class="text-justify font">Feel free to send us a message using the form below. We'll get back to you as soon as possible.</p>
+  </div>
+</div>
+<div class="jumbotron  m-5" >
+  <div class="row ">
+      <div class="col-md-6  ">
+          
+        <img src="{% static 'img/conform.jpg'%}" alt="" class="img-fluid">
+             
+      </div>
+      <div class="col-md-6 p-2 ">
+        <div class="">
+          <div class="container ">
+              <h1 class="display-6 d-sm-none">Contact Us</h1>
+              <h1 class="display-4 d-none d-sm-block">Contact Us</h1>
+              <hr>
+              
+              <form name="contactform" id="contactform" method="Post">
+                {% csrf_token %}
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                      <i class="fas fa-cubes fa-2x me-3" style="color: rgb(197, 167, 241);"></i>
+                      <span class="h1 fw-bold mb-0">UGS</span>
+                    </div>
+                  
+                  <div class="form-outline mb-4">
+                    <input type="email" id="Email" class="form-control form-control-lg" name="Email" required autocomplete="off"/>
+                    <label class="form-label" for="Email">Email address</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                      <input type="text" id="Name" class="form-control form-control-lg" name="Name" required autocomplete="off"/>
+                      <label class="form-label" for="Name">Name</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px" class="form-control form-control-lg" required autocomplete="off"></textarea>
+                      <label class="form-label" for="subject">Massage</label>
+                    </div>
+          
+                  <div class="mt-4 pt-2">
+                      <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                    </div>
+              
+                </form>
+              
+          </div>
+      </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contactform');
+      const successMessage = document.querySelector('.success-message');  
+      if (form ) {
+          form.addEventListener('submit', function(event) {
+              if (!validateForm()) {
+                  event.preventDefault(); // Prevent the form from submitting if validation fails
+              } 
+            
+          });
+      }
+
+      function validateEmail(email) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function validateName(name) {
+          return /^[A-Za-z]+$/.test(name);
+      }
+
+      function validateForm() {
+          var email = document.getElementById('Email').value;
+          var name = document.getElementById('Name').value;
+
+          if (!validateEmail(email)) {
+              alert('Please enter a valid email address.');
+              return false;
+          }
+
+          if (!validateName(name)) {
+              alert('Please enter a valid name.');
+              return false;
+          }
+
+          // Additional validation logic if needed
+
+          return true; // Allow the form to submit
+      }
+     
+  });
+</script>
+
+
+
+{% endblock %}

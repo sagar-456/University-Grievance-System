@@ -1,0 +1,169 @@
+{% extends 'base.html' %} {% load static %} {% block body %}
+ {% if user.is_authenticated %}
+<section
+  class="p-5"
+  style="
+   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  "
+>
+<div style="margin-left: 90%;">
+  <a href="/notice" class="btn btn-danger ml-2 mb-2">Notice</a>
+</div>
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <img
+          
+            src="{% if user_data.gender == 'male' %}{% static 'img/male.jpg' %}{% else %}{% static 'img/female.jpg' %}{% endif %}"
+            alt="avatar"
+            class="rounded-circle img-fluid"
+            style="width: 150px"
+          />
+          <h5 class="my-3">{{ user_data.user.username }}</h5>
+          <p class="text-muted mb-2">{{ user_data.user.email }}</p>
+          <p class="mb-1">{{ user_data.user_type }}</p>
+          <div class="d-flex justify-content-center mb-2">
+            <button type="button" class="btn btn-warning">Edit Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 mt-lg-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Full Name</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">
+                {{ user_data.user.first_name }} {{ user_data.user.last_name }}
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Email</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ user_data.user.email }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Phone</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ user_data.phone_number }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">User</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ user_data.user_type }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Gender</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ user_data.gender }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 mt-lg-4">
+      <div class="card mb-4 mb-lg-0">
+        <div class="card-body ">
+          <div class="container mt-4">
+            <h3>Make sure you read the Guidelines <em>First</em>!</h3>
+            <hr />
+            <p class="card-text text-justify ">Welcome <b>{{ user_data.user.username }}</b> to our University Grievance System! Our platform is dedicated to fostering an environment of open communication and prompt resolution. Please review the guidelines carefully before filing your complaint to ensure a seamless and effective grievance resolution process. Your cooperation in providing clear, specific details and adhering to respectful communication is essential for a fair and transparent resolution. We are committed to addressing your concerns promptly and confidentially. Thank you for contributing to a positive university experience.
+            </p>
+            <a href="/guidelines" class="btn btn-success mb-2">Guidelines</a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card mb-4 mb-lg-0">
+        <div class="card-body p-0">
+          <div class="container mt-4">
+            <h3>Create a New Complaint</h3>
+            <hr />
+            <form method="post" action="">
+              {% csrf_token %} {{ complaint_form.as_p}}
+              <input
+                type="submit"
+                class="btn btn-primary mb-2"
+                value="Submit Complaint"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="container mt-4">
+    {% if user_complaints %} 
+    {% for complaint in user_complaints %} 
+    {% if forloop.counter0|divisibleby:2 %}
+    <div class="row">
+      {% endif %}
+      <div class="col-lg-6 mt-2">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title p-2">{{ complaint.title }}</h5>
+            <hr />
+            <p class="card-text">{{ complaint.post_content }}</p>
+            <p class="card-text">
+              <small class="text-muted"
+                >Posted on {{ complaint.created_at }}</small
+              >
+            </p>
+            <a href="" class="btn btn-danger m-3">Delete</a>
+          </div>
+        </div>
+      </div>
+      {% if forloop.counter|divisibleby:2 or forloop.last %}
+    </div>
+    {% endif %} 
+    {% endfor %}
+    
+    
+  </div>
+
+  {% else %}
+
+  <div class="col-lg-8">
+    <div class="card mb-4 mb-lg-2">
+      <div class="card-body">
+        <h5 class="p-2">No complaints yet.</h5>
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
+</section>
+{% else %}
+<div class="container alert alert-danger" role="alert">
+  <img src="{% static 'img/pnf.png'%}" alt="" class="img-fluid" />
+</div>
+
+{% endif %}
+
+ {% endblock %}

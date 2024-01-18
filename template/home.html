@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+    {%block body %}
+    <div class="jumbotron m-5">
+    <div class="container d-sm-none">
+        <h1 class="display-6">Welcome to the University Grievances System</h1>
+        <hr>
+        <p class="text-justify  ">We understand that your academic journey is of utmost importance,
+            and we are committed to ensuring that your experience at our institution is as smooth and fulfilling as
+            possible. However, we also acknowledge that concerns and issues may arise during your time here. To address
+            these concerns and provide a platform for your voice to be heard, we have established the University
+            Grievances System.</p>
+    </div>
+    <div class="container d-none d-sm-block">
+        <h1 class="display-6">Welcome to the University Grievances System</h1>
+        <hr>
+        <p class="text-justify  font">We understand that your academic journey is of utmost importance,
+            and we are committed to ensuring that your experience at our institution is as smooth and fulfilling as
+            possible. However, we also acknowledge that concerns and issues may arise during your time here. To address
+            these concerns and provide a platform for your voice to be heard, we have established the University
+            Grievances System.</p>
+    </div>
+</div>
+    
+    <div class="container mb-4">
+        <div class="row ">
+            <div class="col-md-6 p-2 ">
+                
+              <img src="{% static 'img/complaint.png'%}" alt="" class="img-fluid">
+                   
+            </div>
+            <div class="col-md-6 p-2 " style="background-color: white; border-radius: 10px;">
+                <div class="container mt-5">
+                    <h2>Complaints and Concerns:</h2>
+                    <p class="text-justify">We encourage you to share any complaints or concerns you may have about your experience at our university. Whether it's related to academic matters, administrative processes, or campus facilities.
+                    </p>
+                    <a href="/login_user"> <button type="button" class="btn btn-danger ">Complaint</button></a>
+                </div>
+                <hr>
+                <div class="container mt-3">
+                    <h2>Feedback:</h2>
+                    <p class="text-justify">Your feedback is essential to our ongoing commitment to excellence. Whether you have positive experiences to share or suggestions for improvement, we value your insights on our university services and programs. Your feedback helps us celebrate successes and identify areas for enhancement.
+                    </p>
+                    <button type="button" class="btn btn-primary">Feedback</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   
+    {% endblock %}
+
+   
+

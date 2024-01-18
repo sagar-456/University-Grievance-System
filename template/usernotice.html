@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block body %}
+{% if user.is_authenticated %}
+<section
+  class="p-5"
+  style="
+   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  "
+>
+<div style="margin-left: 90%;">
+  <a href="/notice" class="btn btn-danger ml-2 mb-2">Notice</a>
+</div>
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <img
+          
+            src="{% if user_data.gender == 'male' %}{% static 'img/male.jpg' %}{% else %}{% static 'img/female.jpg' %}{% endif %}"
+            alt="avatar"
+            class="rounded-circle img-fluid"
+            style="width: 150px"
+          />
+          <h5 class="my-3">{{ user_data.user.username }}</h5>
+          <p class="text-muted mb-2">{{ user_data.user.email }}</p>
+          <p class="mb-1">{{ user_data.user_type }}</p>
+          <div class="d-flex justify-content-center mb-2">
+            <button type="button" class="btn btn-warning">Edit Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8 mt-lg-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Full Name</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">
+                {{ user_data.user.first_name }} {{ user_data.user.last_name }}
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Email</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ user_data.user.email }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Phone</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ user_data.phone_number }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">User</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ user_data.user_type }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Gender</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ user_data.gender }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+  
+</section>
+{% else %}
+<div class="container alert alert-danger" role="alert">
+  <img src="{% static 'img/pnf.png'%}" alt="" class="img-fluid" />
+</div>
+
+{% endif %}
+
+ {% endblock %}
